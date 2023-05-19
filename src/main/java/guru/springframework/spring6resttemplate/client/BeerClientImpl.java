@@ -20,8 +20,8 @@ public class BeerClientImpl implements BeerClient {
 
     private final RestTemplateBuilder restTemplateBuilder;
 
-    private static final String GET_BEER_PATH = "/api/v1/beer";
-    private static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
+    public static final String GET_BEER_PATH = "/api/v1/beer";
+    public static final String GET_BEER_BY_ID_PATH = "/api/v1/beer/{beerId}";
 
     @Override
     public void deleteBeer(UUID beerId) {
@@ -36,11 +36,12 @@ public class BeerClientImpl implements BeerClient {
         return getBeerById(beerDto.getId());
     }
 
+
     @Override
     public BeerDTO createBeer(BeerDTO newDto) {
         RestTemplate restTemplate = restTemplateBuilder.build();
 
-        ResponseEntity<BeerDTO> response = restTemplate.postForEntity(GET_BEER_PATH, newDto, BeerDTO.class);
+//        ResponseEntity<BeerDTO> response = restTemplate.postForEntity(GET_BEER_PATH, newDto, BeerDTO.class);
         URI uri = restTemplate.postForLocation(GET_BEER_PATH, newDto);
         return restTemplate.getForObject(uri.getPath(), BeerDTO.class);
     }
